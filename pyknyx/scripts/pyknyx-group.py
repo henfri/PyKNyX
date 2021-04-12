@@ -328,8 +328,8 @@ def main():
                                      description="This tool is used to send multicast requests on KNX bus.",
                                      epilog="Under developement...")
     parser.add_argument("-l", "--logger",
-                        choices=["trace", "debug", "info", "warning", "error", "exception", "critical"],
-                        action="store", dest="loggerLevel", default="info", metavar="LEVEL",
+                        choices=["TRACE", "DEBUG", "INFO", "WARNING", "ERROR", "EXCEPTION", "CRITICAL"],
+                        action="store", dest="loggerLevel", default="INFO", metavar="LEVEL",
                         help="logger level")
     parser.add_argument("-m", "--map", action="store", type=str, dest="gadMapPath", default=os.path.expandvars("$PKNYX_GAD_MAP_PATH"),
                         help="set/override $PKNYX_GAD_MAP_PATH var")
@@ -390,7 +390,7 @@ def main():
     # Parse
     args = parser.parse_args()
 
-    logger.setLevel(args.loggerLevel)
+    logger.setLevel(args.loggerLevel.upper())
 
     # If XML map file name is given, try to load it
     if args.xmlMapFile:
